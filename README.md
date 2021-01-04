@@ -30,7 +30,7 @@
 | burden_id          | integer  | null: false       |
 | prefecture_id      | integer  | null: false       |
 | delivery_period_id | integer  | null: false       |
-| user_id            | refences | foreign_key: true |
+| user               | refences | foreign_key: true |
 
 ### Association
 
@@ -53,8 +53,8 @@
 | address        | string   | null: false       |
 | phone_number   | integer  | null: false       |
 | building_name  | string   |                   |
-| user_id        | refences | foreign_key: true |
-| item_id        | refences | foreign_key: true |
+| user           | refences | foreign_key: true |
+| item           | refences | foreign_key: true |
 
 ### Association
 
