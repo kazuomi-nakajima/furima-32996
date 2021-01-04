@@ -14,6 +14,7 @@ has_many :items
 has_many :orders
 has_one :profile
 
+
 ## Profiles テーブル
 
 | Column          | Type     | Options           |
@@ -45,10 +46,12 @@ has_one :user
 
 ### Association
 
+
 belongs_to :user
 has_one :order
 has_one :shipping
 has_one_attached :image
+
 
 ## Shippings テーブル
 
@@ -78,9 +81,11 @@ has_one :item
 
 ### Association
 
+
 belongs_to :user
 has_one :item
 has_one :creditcard
+
 
 ## CreditCards テーブル
 
