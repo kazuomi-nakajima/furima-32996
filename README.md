@@ -2,11 +2,11 @@
 
 ## Users テーブル
 
-| Column   | Type   | Options  |
-| -------- | ------ | -------- |
-| email    | string | not null |
-| password | string | not null |
-| name     | string | not null |
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| email    | string | null: false |
+| password | string | null: false |
+| name     | string | null: false |
 
 ### Association
 
@@ -18,13 +18,13 @@ has_one :profile
 
 | Column          | Type     | Options           |
 | --------------- | -------- | ----------------- |
-| hira_first_name | string   | not null          |
-| hira_last_name  | string   | not null          |
-| kana_first_name | string   | not null          |
-| kana_last_name  | string   | not null          |
-| year_birth      | integer  | not null          |
-| month_birth     | integer  | not null          |
-| day_birth       | integer  | not null          |
+| hira_first_name | string   | null: false       |
+| hira_last_name  | string   | null: false       |
+| kana_first_name | string   | null: false       |
+| kana_last_name  | string   | null: false       |
+| year_birth      | integer  | null: false       |
+| month_birth     | integer  | null: false       |
+| day_birth       | integer  | null: false       |
 | user_id         | refences | foreign_key: true |
 
 ### Association
@@ -35,12 +35,12 @@ has_one :user
 
 | Column      | Type                 | Options           |
 | ----------- | -------------------- | ----------------- |
-| name        | string               | not null          |
-| description | text                 | not null          |
-| category    | string               | not null          |
-| state       | string               | not null          |
-| price       | integer              | not null          |
-| image       | ActiveStorage で実装 | not null          |
+| name        | string               | null: false       |
+| description | text                 | null: false       |
+| category    | string               | null: false       |
+| state       | string               | null: false       |
+| price       | integer              | null: false       |
+| image       | ActiveStorage で実装 | null: false       |
 | user_id     | refences             | foreign_key: true |
 
 ### Association
@@ -54,9 +54,9 @@ has_one_attached :image
 
 | Column  | Type     | Options           |
 | ------- | -------- | ----------------- |
-| burden  | string   | not null          |
-| region  | string   | not null          |
-| days    | string   | not null          |
+| burden  | string   | null: false       |
+| region  | string   | null: false       |
+| days    | string   | null: false       |
 | item_id | refences | foreign_key: true |
 
 ### Association
@@ -67,11 +67,11 @@ has_one :item
 
 | Column        | Type     | Options           |
 | ------------- | -------- | ----------------- |
-| postal_code   | integer  | not null          |
-| region        | string   | not null          |
-| city          | string   | not null          |
-| house_number  | string   | not null          |
-| phone_number  | integer  | not null          |
+| postal_code   | integer  | null: false       |
+| region        | string   | null: false       |
+| city          | string   | null: false       |
+| house_number  | string   | null: false       |
+| phone_number  | integer  | null: false       |
 | building_name | string   |                   |
 | user_id       | refences | foreign_key: true |
 | item_id       | refences | foreign_key: true |
@@ -86,10 +86,10 @@ has_one :creditcard
 
 | Column          | Type     | Options           |
 | --------------- | -------- | ----------------- |
-| number          | integer  | not null          |
-| exp_year        | integer  | not null          |
-| exp_month       | integer  | not null          |
-| security_number | integer  | not null          |
+| number          | integer  | null: false       |
+| exp_year        | integer  | null: false       |
+| exp_month       | integer  | null: false       |
+| security_number | integer  | null: false       |
 | order_id        | refences | foreign_key: true |
 
 ### Association
