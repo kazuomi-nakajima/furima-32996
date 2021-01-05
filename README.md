@@ -2,16 +2,16 @@
 
 ## Users テーブル
 
-| Column              | Type   | Options     |
-| ------------------- | ------ | ----------- |
-| nickname            | string | null: false |
-| email               | string | null: false |
-| encrypted_password  | string | null: false |
-| first_name          | string | null: false |
-| last_name           | string | null: false |
-| furigana_first_name | string | null: false |
-| furigana_last_name  | string | null: false |
-| birth_date          | date   | null: false |
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| first_name          | string | null: false               |
+| last_name           | string | null: false               |
+| furigana_first_name | string | null: false               |
+| furigana_last_name  | string | null: false               |
+| birth_date          | date   | null: false               |
 
 ### Association
 
@@ -45,6 +45,19 @@
 
 ## Orders テーブル
 
+| Column | Type     | Options           |
+| ------ | -------- | ----------------- |
+| user   | refences | foreign_key: true |
+| item   | refences | foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- has_one :item
+- has_one :ordersource
+
+## OrderSources テーブル
+
 | Column         | Type     | Options           |
 | -------------- | -------- | ----------------- |
 | postal_code    | integer  | null: false       |
@@ -53,11 +66,9 @@
 | address        | string   | null: false       |
 | phone_number   | integer  | null: false       |
 | building_name  | string   |                   |
-| user           | refences | foreign_key: true |
-| item           | refences | foreign_key: true |
+| order          | refences | foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- has_one :item
+- has_one :order
 - belongs_to_active_hash :prefecture
