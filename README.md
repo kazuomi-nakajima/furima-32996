@@ -53,14 +53,14 @@
 ### Association
 
 - belongs_to :user
-- has_one :item
+- belongs_to :item
 - has_one :ordersource
 
 ## OrderSources テーブル
 
 | Column         | Type     | Options           |
 | -------------- | -------- | ----------------- |
-| postal_code    | integer  | null: false       |
+| postal_code    | string   | null: false       |
 | prefecture_id  | integer  | null: false       |
 | municipalities | string   | null: false       |
 | address        | string   | null: false       |
@@ -70,5 +70,5 @@
 
 ### Association
 
-- has_one :order
+- belongs_to :order
 - belongs_to_active_hash :prefecture
