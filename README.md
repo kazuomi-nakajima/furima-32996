@@ -2,96 +2,66 @@
 
 ## Users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| email    | string | null: false |
-| password | string | null: false |
-| name     | string | null: false |
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| first_name          | string | null: false               |
+| last_name           | string | null: false               |
+| furigana_first_name | string | null: false               |
+| furigana_last_name  | string | null: false               |
+| birth_date          | date   | null: false               |
 
 ### Association
 
-has_many :items  
-has_many :orders  
-has_one :profile  
-
-## Profiles テーブル
-
-| Column          | Type     | Options           |
-| --------------- | -------- | ----------------- |
-| hira_first_name | string   | null: false       |
-| hira_last_name  | string   | null: false       |
-| kana_first_name | string   | null: false       |
-| kana_last_name  | string   | null: false       |
-| year_birth      | integer  | null: false       |
-| month_birth     | integer  | null: false       |
-| day_birth       | integer  | null: false       |
-| user_id         | refences | foreign_key: true |
-
-### Association
-
-has_one :user
+- has_many :items
+- has_many :orders
 
 ## Items テーブル
 
-| Column      | Type                 | Options           |
-| ----------- | -------------------- | ----------------- |
-| name        | string               | null: false       |
-| description | text                 | null: false       |
-| category    | string               | null: false       |
-| state       | string               | null: false       |
-| price       | integer              | null: false       |
-| image       | ActiveStorage で実装 | null: false       |
-| user_id     | refences             | foreign_key: true |
+| Column             | Type       | Options           |
+| ------------------ | ---------- | ----------------- |
+| name               | string     | null: false       |
+| description        | text       | null: false       |
+| price              | integer    | null: false       |
+| category_id        | integer    | null: false       |
+| state_id           | integer    | null: false       |
+| burden_id          | integer    | null: false       |
+| prefecture_id      | integer    | null: false       |
+| delivery_period_id | integer    | null: false       |
+| user               | references | foreign_key: true |
 
 ### Association
 
-belongs_to :user  
-has_one :order  
-has_one :shipping  
-has_one_attached :image  
-
-## Shippings テーブル
-
-| Column  | Type     | Options           |
-| ------- | -------- | ----------------- |
-| burden  | string   | null: false       |
-| region  | string   | null: false       |
-| days    | string   | null: false       |
-| item_id | refences | foreign_key: true |
-
-### Association
-
-has_one :item
+- belongs_to :user
+- has_one :order
 
 ## Orders テーブル
 
-| Column        | Type     | Options           |
-| ------------- | -------- | ----------------- |
-| postal_code   | integer  | null: false       |
-| region        | string   | null: false       |
-| city          | string   | null: false       |
-| house_number  | string   | null: false       |
-| phone_number  | integer  | null: false       |
-| building_name | string   |                   |
-| user_id       | refences | foreign_key: true |
-| item_id       | refences | foreign_key: true |
+| Column | Type       | Options           |
+| ------ | ---------- | ----------------- |
+| user   | references | foreign_key: true |
+| item   | references | foreign_key: true |
 
 ### Association
 
-belongs_to :user  
-has_one :item  
-has_one :creditcard  
+- belongs_to :user
+- belongs_to :item
+- has_one :ordersource
 
-## CreditCards テーブル
+## OrderSources テーブル
 
-| Column          | Type     | Options           |
-| --------------- | -------- | ----------------- |
-| number          | integer  | null: false       |
-| exp_year        | integer  | null: false       |
-| exp_month       | integer  | null: false       |
-| security_number | integer  | null: false       |
-| order_id        | refences | foreign_key: true |
+| Column        | Type       | Options           |
+| ------------- | ---------- | ----------------- |
+| postal_code   | string     | null: false       |
+| prefecture_id | integer    | null: false       |
+| municipal     | string     | null: false       |
+| address       | string     | null: false       |
+| phone_number  | string     | null: false       |
+| building_name | string     |                   |
+| order         | references | foreign_key: true |
 
 ### Association
 
-has_one :order
+- belongs_to :order
