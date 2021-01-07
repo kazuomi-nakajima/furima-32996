@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   def index
   end
 
@@ -10,4 +11,14 @@ class ItemsController < ApplicationController
 
   def show
   end
+
+  private
+
+  def move_to_index
+    unless user_sign_in?
+      redirect_to action: :index
+    end
+  end
+
+
 end
