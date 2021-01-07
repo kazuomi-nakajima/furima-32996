@@ -10,53 +10,6 @@ RSpec.describe User, type: :model do
       it 'email, nickname, first_name, last_name, furigana_first_name, furigana_last_name, birth_date,password, password_confirmationが存在している' do
         expect(@user).to be_valid
       end
-      # 以下 ユーザー情報確認項目
-      it 'パスワードは、半角英数字混合かつ6文字以上での入力' do
-        @user.password = '12345a'
-        @user.password_confirmation = '12345a'
-        expect(@user).to be_valid
-      end
-      it 'パスワードとパスワード（確認用）の値が一致する' do
-        @user.password = '12345a'
-        @user.password_confirmation = @user.password
-        expect(@user).to be_valid
-      end
-      # 以上 ユーザー情報確認項目
-
-      # 以下 本人情報確認項目
-      it 'first_nameが全角（漢字）での入力' do
-        @user.first_name = '松'
-        expect(@user).to be_valid
-      end
-      it 'first_nameが全角（ひらがな）での入力' do
-        @user.first_name = 'まつ'
-        expect(@user).to be_valid
-      end
-      it 'first_nameが全角（カタカナ）での入力' do
-        @user.first_name = 'まつ'
-        expect(@user).to be_valid
-      end
-      it 'last_nameが全角（漢字）での入力' do
-        @user.last_name = '竹'
-        expect(@user).to be_valid
-      end
-      it 'last_nameが全角（ひらがな）での入力' do
-        @user.last_name = 'たけ'
-        expect(@user).to be_valid
-      end
-      it 'last_nameが全角（カタカナ）での入力' do
-        @user.last_name = 'タケ'
-        expect(@user).to be_valid
-      end
-      it 'furigana_first_nameが全角（カタカナ）での入力' do
-        @user.furigana_first_name = 'ウメ'
-        expect(@user).to be_valid
-      end
-      it 'furigana_last_nameが全角（カタカナ）での入力' do
-        @user.furigana_last_name = 'ウメ'
-        expect(@user).to be_valid
-      end
-      # 以上 本人情報確認項目
     end
 
     context '新規登録できない時' do

@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   # ストロングパラメーターの編集 password以外を追加
   def configure_permitted_parameters
-    # binding.pry
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: [:nickname, :email, :first_name, :last_name, :furigana_first_name,
                                              :furigana_last_name, :birth_date])

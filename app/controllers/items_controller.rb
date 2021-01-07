@@ -10,10 +10,4 @@ class ItemsController < ApplicationController
 
   def show
   end
-
-  private
-
-  def items_params
-    # params.require(:item).permit(:, :, :)
-  end
 end
