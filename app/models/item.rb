@@ -16,10 +16,10 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   # 空の出品を保存できないようにする
-  validates :name,:description,:price
+  validates_presence_of :name, :description, :price
 
   # priceが300円 〜 9999999円の時は保存できないようにする
-  valideted :price, { numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 } }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
   # ActivateHashの選択が「--」の時は保存できないようにする
   validates :category_id, :state_id, :burden_id, :prefecture_id, :delivery_period_id, numericality: { other_than: 1 } 
