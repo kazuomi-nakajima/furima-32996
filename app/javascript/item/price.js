@@ -1,6 +1,5 @@
 function price_calculation() {   // 料金計算関数
 
-  console.log ("読み込み確認");   //読み込まれたか確認用ログ
   const price = document.getElementById("item-price");
 
   price.addEventListener("keyup", () =>{
