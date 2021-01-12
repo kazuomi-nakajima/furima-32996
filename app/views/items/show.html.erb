@@ -29,13 +29,18 @@
 
     
     <% if @item.present? == false || user_signed_in? %>   <%# 未ログインユーザーとSold out時は、ボタンを表示しない %>
-      <% if current_user.id == @item.user_id %>   <%# 現在ログインしているユーザーが商品の出品者であれば %>
+      
+      <%# 現在ログインしているユーザーが商品の出品者であれば %>
+      <% if current_user.id == @item.user_id %>   
         <%= link_to '商品の編集', "#", method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
         <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
-      <% else %>   <%# 商品が売れていないかつ、ログインしているユーザーと出品しているユーザーが他者の場合 %>
+       
+      <%# 商品が売れていないかつ、ログインしているユーザーと出品しているユーザーが他者の場合 %>
+      <% else %> 
         <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
       <%end%>
+      
     <% end %>
 
     <div class="item-explain-box">
