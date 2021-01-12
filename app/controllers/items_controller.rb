@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :show] # 重複処理をまとめる
-  before_action :authenticate_user!, only: [:new, :edit] # ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
+  before_action :set_item, only: [:edit, :update, :show, :destroy] # 重複処理をまとめる
+  before_action :authenticate_user!, except: [:index, :show] # ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
   before_action :move_to_index, only: [:edit] # url直接記入の不正アクセス防止
 
   def index
@@ -32,13 +32,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    if user_signed_in? && (current_user.id == item.user_id)
-      item.destroy
-      redirect_to root_path
-    else
-      redirect_to action: :index
-    end
+    @item.destroy if current_user.id == @item.user_id
+    redirect_to root_path
   end
 
   def show
