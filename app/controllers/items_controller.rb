@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :show] #重複処理をまとめる
   before_action :authenticate_user!, only: [:new, :edit] #ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
-  before_action :move_to_index, except: [:index, :show] #url直接記入の不正アクセス防止
+  before_action :move_to_index, only: [:edit] #url直接記入の不正アクセス防止
 
   def index
     @items = Item.all.includes(:user).order('created_at DESC')
@@ -32,6 +32,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
   end
 
   def show
