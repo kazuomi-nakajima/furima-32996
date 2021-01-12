@@ -28,7 +28,7 @@
     </div>
 
     
-    <% if @item.present? == false || user_signed_in? %>   <%# 未ログインユーザーとSold out時は、ボタンを表示しない %>
+    <% if user_signed_in? %>   <%# 未ログインユーザーとSold out時は、ボタンを表示しない %>
       
       <%# 現在ログインしているユーザーが商品の出品者であれば %>
       <% if current_user.id == @item.user_id %>   
@@ -40,7 +40,7 @@
       <% else %> 
         <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
       <%end%>
-      
+
     <% end %>
 
     <div class="item-explain-box">
