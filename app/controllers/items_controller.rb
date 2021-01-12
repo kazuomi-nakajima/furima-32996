@@ -1,17 +1,16 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :set_item, only: [:edit, :update, :show] #重複処理をまとめる
+  before_action :authenticate_user!, only: [:new, :edit] #ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
+  before_action :move_to_index, except: [:index, :show] #url直接記入の不正アクセス防止
 
   def index
     @item = Item.all.includes(:user).order('created_at DESC')
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to action: :show
     else
@@ -36,10 +35,14 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   private
+
+  def item_params
+    params.require(:item).permit(:name, :description, :price, :category_id, :state_id, :burden_id, :prefecture_id,
+                                 :delivery_period_id, :image).merge(user_id: current_user.id)
+  end
 
   def move_to_index
     item = Item.find(params[:id].to_i)
@@ -49,8 +52,8 @@ class ItemsController < ApplicationController
     end
   end
 
-  def item_params
-    params.require(:item).permit(:name, :description, :price, :category_id, :state_id, :burden_id, :prefecture_id,
-                                 :delivery_period_id, :image).merge(user_id: current_user.id)
+  def set_item
+    @item = Item.find(params[:id])
   end
+  
 end
