@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
-  # before_action :move_to_index, except: [:index]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :move_to_index, except: [:index, :show]
 
   def index
     @item = Item.all.includes(:user).order('created_at DESC')
@@ -41,9 +41,13 @@ class ItemsController < ApplicationController
 
   private
 
-  # def move_to_index
-  #   redirect_to action: :index unless user_signed_in?
-  # end
+  def move_to_index
+    item = Item.find(params[:id].to_i)
+    # sold out時に直接urlを叩いたらindexへ遷移するコードは未記入
+    unless user_signed_in? && (current_user.id == item.user_id)
+      redirect_to action: :index 
+    end
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :price, :category_id, :state_id, :burden_id, :prefecture_id,
