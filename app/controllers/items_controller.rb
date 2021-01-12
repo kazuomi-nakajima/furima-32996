@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show] #url直接記入の不正アクセス防止
 
   def index
-    @item = Item.all.includes(:user).order('created_at DESC')
+    @items = Item.all.includes(:user).order('created_at DESC')
   end
 
   def edit
