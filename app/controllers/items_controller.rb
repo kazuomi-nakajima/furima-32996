@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update, :show] #重複処理をまとめる
-  before_action :authenticate_user!, only: [:new, :edit] #ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
-  before_action :move_to_index, only: [:edit] #url直接記入の不正アクセス防止
+  before_action :set_item, only: [:edit, :update, :show] # 重複処理をまとめる
+  before_action :authenticate_user!, only: [:new, :edit] # ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
+  before_action :move_to_index, only: [:edit] # url直接記入の不正アクセス防止
 
   def index
     @items = Item.all.includes(:user).order('created_at DESC')
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
       item.destroy
       redirect_to root_path
     else
-      redirect_to action: :index 
+      redirect_to action: :index
     end
   end
 
@@ -54,13 +54,10 @@ class ItemsController < ApplicationController
   def move_to_index
     item = Item.find(params[:id].to_i)
     # sold out時に直接urlを叩いたらindexへ遷移するコードは未記入
-    unless user_signed_in? && (current_user.id == item.user_id)
-      redirect_to action: :index 
-    end
+    redirect_to action: :index unless user_signed_in? && (current_user.id == item.user_id)
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
-  
 end
