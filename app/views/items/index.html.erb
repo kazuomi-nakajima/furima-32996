@@ -130,7 +130,7 @@
       <% unless @item.nil? || @item.empty? %>
         <% @item.each do |item| %>
           <li class='list'>
-            <%= link_to "#" do %><%#ここは詳細ページ実装後#%>
+            <%= link_to item_path(item.id) do %><%#ここは詳細ページ実装後#%>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
 
