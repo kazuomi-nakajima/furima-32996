@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
   # テーブル関係
   belongs_to :user
-  # has_one :order
+  has_one :order
   has_one_attached :image
 
   # 画像が空は保存できない
