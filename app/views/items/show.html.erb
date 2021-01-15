@@ -38,7 +38,7 @@
        
       <%# 商品が売れていないかつ、ログインしているユーザーと出品しているユーザーが他者の場合 %>
       <% else %> 
-        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+        <%= link_to '購入画面に進む', item_orders_path(@item), class:"item-red-btn"%>
       <%end%>
 
     <% end %>
