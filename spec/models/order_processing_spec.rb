@@ -33,17 +33,18 @@ RSpec.describe OrderProcessing, type: :model do
       it '郵便番号が空' do
         @order_processing.postal_code = ''
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid. Include hyphen(-)")
+        expect(@order_processing.errors.full_messages).to include("Postal code can't be blank",
+                                                                  'Postal code is invalid. Include hyphen(-)')
       end
       it '-がない' do
         @order_processing.postal_code = '0000000'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_processing.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '3桁 - 4桁 ではない' do
         @order_processing.postal_code = '00-00000'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@order_processing.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       # /postal_code
 
@@ -51,12 +52,12 @@ RSpec.describe OrderProcessing, type: :model do
       it '都道府県が空' do
         @order_processing.prefecture_id = ''
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+        expect(@order_processing.errors.full_messages).to include("Prefecture can't be blank", 'Prefecture is not a number')
       end
       it '都道府県が1' do
         @order_processing.prefecture_id = '1'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@order_processing.errors.full_messages).to include('Prefecture must be other than 1')
       end
       # /prefecture_id
 
@@ -80,35 +81,34 @@ RSpec.describe OrderProcessing, type: :model do
       it 'phone_numberが空' do
         @order_processing.phone_number = ''
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number can't be blank", "Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid')
       end
       it 'phone_numberが全角数字' do
         @order_processing.phone_number = '１'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが半角英字' do
         @order_processing.phone_number = 'a'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberに-が入っている' do
         @order_processing.phone_number = '090-1234-5678'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberの桁が10桁未満' do
         @order_processing.phone_number = '123456789'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberの桁が12桁以上' do
         @order_processing.phone_number = '123456789012'
         @order_processing.valid?
-        expect(@order_processing.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
       # /phone_number
-
     end
   end
 end
