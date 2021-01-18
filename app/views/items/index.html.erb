@@ -127,7 +127,7 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、商品を一覧表示 %>
-      <% unless @items.nil? || @items.empty? %>
+      <% if @items.present? %>
         <% @items.each do |item| %>
           <li class='list'>
             <%= link_to item_path(item.id) do %><%#ここは詳細ページ実装後#%>
@@ -135,7 +135,7 @@
               <%= image_tag item.image, class: "item-img" %>
 
               <%# 商品が売れていればsold outを表示 %>
-              <% if @items.empty? %>
+              <% if item.order.present? %>
                 <div class='sold-out'>
                   <span>Sold Out!!</span>
                 </div>

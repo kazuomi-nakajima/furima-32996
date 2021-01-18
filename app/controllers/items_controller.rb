@@ -48,11 +48,11 @@ class ItemsController < ApplicationController
 
   def move_to_index
     item = Item.find(params[:id].to_i)
-    # sold out時に直接urlを叩いたらindexへ遷移するコードは未記入
     redirect_to action: :index unless user_signed_in? && (current_user.id == item.user_id)
   end
 
   def set_item
     @item = Item.find(params[:id])
   end
+
 end
