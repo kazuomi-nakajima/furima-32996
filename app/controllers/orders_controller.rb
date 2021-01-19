@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: [:index, :create, :order_processing_params] # 単体item情報取得
+  before_action :set_item, only: [:index, :create] # 単体item情報取得
   before_action :authenticate_user!, only: [:index] # ログアウト状態のユーザーがアクセスするとログイン画面へ遷移
   before_action :move_to_index, only: [:index] # url直接記入の不正アクセス防止
 
