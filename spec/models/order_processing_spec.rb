@@ -17,18 +17,16 @@ RSpec.describe OrderProcessing, type: :model do
         @order_processing.building_name = ''
         expect(@order_processing).to be_valid
       end
+      it 'phone_numberの桁が10桁でも登録できる' do
+        @order_processing.phone_number = '0901234567'
+        expect(@order_processing).to be_valid
+      end
     end
-    it 'phone_numberの桁が10桁でも登録できる' do
-      @order_processing.phone_number = '0901234567'
-      expect(@order_processing).to be_valid
-    end
-
     context '購入できない時' do
       # token
       it 'トークンが空' do
         @order_processing.token = ''
         @order_processing.valid?
-        # binding.pry
         expect(@order_processing.errors.full_messages).to include("Token can't be blank")
       end
       # /token
