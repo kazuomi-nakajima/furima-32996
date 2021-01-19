@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   # テーブル関係
   has_many :items
-  has_many :oeders
+  has_many :orders
 
   validates :email, uniqueness: true, presence: true, uniqueness: { case_sensitive: true } # 一意性かつ入力必須
   validates_presence_of :nickname, :birth_date
