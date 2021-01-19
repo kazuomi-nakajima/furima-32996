@@ -6,7 +6,9 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
-require("item/price");
+require("item/price")
+require("pay/pay")
+
 
 
 
