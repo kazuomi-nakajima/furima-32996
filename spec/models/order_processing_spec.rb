@@ -88,7 +88,12 @@ RSpec.describe OrderProcessing, type: :model do
         expect(@order_processing.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid')
       end
       it 'phone_numberが全角数字' do
-        @order_processing.phone_number = '１'
+        @order_processing.phone_number = '０１２３４５６７８９'
+        @order_processing.valid?
+        expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberが全角ひらがな' do
+        @order_processing.phone_number = 'あいうえおかきくけこ'
         @order_processing.valid?
         expect(@order_processing.errors.full_messages).to include('Phone number is invalid')
       end
